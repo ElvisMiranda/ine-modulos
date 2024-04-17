@@ -1,5 +1,5 @@
 const course = require('../model/course');
-
+const mongoose = require('../data/conn');
 module.exports = {
     courses: {
         getAll: () => {
@@ -10,3 +10,5 @@ module.exports = {
         }
     }
 };
+
+mongoose.disconnect();
