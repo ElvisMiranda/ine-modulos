@@ -2,21 +2,24 @@ require('dotenv').config();
 
 const bodyParser = require('body-parser');
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
+
+mongoose.connect(process.env.MONGODB_URI);
 
 const courseService = require('./services/courseService');
 
 const port = process.env.PORT || 3000;
 
 const cors = require('cors');
-app.use(cors({ optionsSucessStatus: 200 }));
+app.use(cors({ optionsSuccessStatus: 200 }));
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/api/courses', (req, res) => {
-    res.send(courseService.courses.getAll());
+app.get('/api/courses', async (req, res) => {
+    res.send(await courseService.getAll());
 });
 
-app.listen(_ => {
+var listener = app.listen(port, _ => {
     console.log(`Listening on port ${port}`);
 });

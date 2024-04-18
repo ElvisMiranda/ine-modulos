@@ -1,14 +1,7 @@
-const course = require('../model/course');
-const mongoose = require('../data/conn');
+const Course = require('../model/course');
+
 module.exports = {
-    courses: {
-        getAll: () => {
-            //return course.find({});
-            return {
-                hello: 'Hello World'
-            }
-        }
+    getAll: async () => {
+        return await Course.find({});
     }
 };
-
-mongoose.disconnect();
