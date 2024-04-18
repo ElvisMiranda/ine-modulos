@@ -1,7 +1,9 @@
 const Course = require('../model/course');
 
-module.exports = {
-    getAll: async () => {
+class ClassService {
+    async getAll() {
         return await Course.find({});
     }
-};
+}
+
+module.exports = new ClassService();

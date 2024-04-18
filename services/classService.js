@@ -1,17 +1,17 @@
 const Class = require('../model/class');
 
-module.exports = {
-    getByCourse: async(courseId) => {
+class ClassService {
+    async getByCourse(courseId) {
         return await Class.find({ courseId: courseId });
-    },
+    }
 
-    add: async (classEntry) => {
+    async add(classEntry) {
         var $class = new Class(classEntry);
 
         return await $class.save();
-    },
+    }
 
-    update: async (classId, classEntry) => {
+    async update(classId, classEntry) {
         var $class = await Class.findById(classId);
 
         $class.name = classEntry.name;
@@ -21,13 +21,15 @@ module.exports = {
         $class.mode = classEntry.mode;
 
         return await $class.save();
-    },
+    }
 
-    get: async (classId) => {
+    async get(classId) {
         return await Class.findById(classId);
-    },
+    }
 
-    delete: async (classId) => {
+    async delete(classId) {
         await Class.deleteOne({ _id: classId });
     }
-};
+}
+
+module.exports = new ClassService();
